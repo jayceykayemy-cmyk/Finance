@@ -18,7 +18,7 @@ A standalone, offline-first Progressive Web App (PWA).
 
 - The app stores its entries in this browser's local storage on this device. No account, analytics, advertising, or external database is used.
 - The service worker caches the app files after the first successful visit. Open the published link once while online before relying on offline use.
-- The app uses system fonts and makes no external network requests for fonts, analytics, advertising, or data storage.
+- The app's Google Fonts import is optional decoration; if you are offline, the device uses the built-in fallback fonts. No recipe or finance data is sent to Google.
 - Do not clear Chrome's site data or browser storage: doing so can erase your entries. Browser data is not automatically synchronized to another phone or browser.
 - Private browsing/incognito is not suitable for keeping entries.
 - For best reliability, install and use the app in the same browser on the same device.

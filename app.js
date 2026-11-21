@@ -37,7 +37,12 @@ function makeEntry(x){
  const linkedReality = tab==='expected' ? data.reality.find(r=>r.matchId===x.id) : null;
  const linkedExpected = tab==='reality' ? data.expected.find(e=>e.id===x.matchId) : null;
  const isMatched = tab==='expected' ? Boolean(linkedReality) : Boolean(linkedExpected);
- if(isMatched) row.classList.add('matched-entry');
+ if(isMatched){
+  row.classList.add('matched-entry');
+  row.style.backgroundColor='#edf5eb';
+  row.style.borderColor='#a9c5a5';
+  row.style.boxShadow='0 5px 18px rgba(91,132,87,.09)';
+ }
  if(tab==='expected'){
   status.textContent=isMatched?'Matched':(x.done?'Completed':'Pending');
   if(isMatched) status.title='Matched with a Reality entry';
