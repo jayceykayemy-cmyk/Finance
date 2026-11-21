@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f0eae5"><meta name="description" content="A private, offline finance overview.">
+<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icon.svg" type="image/svg+xml"><link rel="stylesheet" href="./style.css"><title>Finance</title>
+</head>
+<body>
+<header class="topbar"><a class="brand" href="./"><span class="brand-mark">◒</span><span>Finance</span></a><span class="privacy"><span class="dot"></span> Private · Offline</span></header>
+<main class="shell">
+<section class="intro"><p class="eyebrow">YOUR MONEY, MADE CLEAR</p><h1>A gentler way<br>to keep track.</h1><p class="sub">Plan what you expect. Compare it with what really happened.</p></section>
+<section class="summary">
+ <div class="summary-card"><span>Expected total</span><strong id="expectedTotal">€0.00</strong></div>
+ <div class="summary-card"><span>Reality total</span><strong id="realityTotal">€0.00</strong></div>
+ <div class="summary-card"><span>Unmatched reality</span><strong id="unmatchedTotal">€0.00</strong></div>
+</section>
+<nav class="tabs" aria-label="Transaction lists"><button class="tab active" data-tab="expected">Expected <span id="expectedCount">0</span></button><button class="tab" data-tab="reality">Reality <span id="realityCount">0</span></button></nav>
+<section class="controls">
+ <label class="search-wrap"><span>⌕</span><input id="search" type="search" placeholder="Search descriptions…" autocomplete="off"></label>
+ <button class="primary" id="addBtn">＋ Add entry</button>
+</section>
+<section class="filters">
+ <label>From <input id="fromDate" type="date"></label><label>To <input id="toDate" type="date"></label>
+ <label class="sort-label">View <select id="sortMode"><option value="date-desc">Newest date</option><option value="date-asc">Oldest date</option><option value="description">Group by description</option></select></label>
+ <button class="text-button" id="clearFilters">Clear</button>
+</section>
+<section id="entries" class="entry-list" aria-live="polite"></section>
+<p id="empty" class="empty" hidden>No entries in this view yet.</p>
+</main>
+<dialog id="editor"><form id="entryForm" method="dialog" class="dialog-card">
+ <div class="dialog-head"><div><p class="eyebrow">YOUR FINANCES</p><h2 id="dialogTitle">New entry</h2></div><button type="button" class="icon-btn" id="closeBtn">×</button></div>
+ <label class="field-label" for="amount">Amount (€)</label><input id="amount" class="text-input" inputmode="decimal" placeholder="68,80" required>
+ <label class="field-label" for="description">Description</label><input id="description" class="text-input" maxlength="120" placeholder="e.g. Groceries" required>
+ <label class="field-label" for="date">Date</label><input id="date" type="date" class="text-input" required>
+ <div id="matchField" hidden><label class="field-label" for="matchTo">Manually match with an Expected entry</label><select id="matchTo" class="text-input"><option value="">Not matched / unexpected</option></select><p class="hint">Matching is always manual. Choose the expected transaction that corresponds to this bank entry.</p></div>
+ <div class="form-actions"><button type="button" class="quiet" id="cancelBtn">Cancel</button><span class="spacer"></span><button class="primary" type="submit">Save entry</button></div>
+</form></dialog>
+<footer>Your data stays in this browser on this device.</footer>
+<script src="./app.js"></script>
+</body></html>
