@@ -34,8 +34,19 @@ function makeEntry(x){
  main.append(desc,meta);
  const amount=document.createElement('div');amount.className='entry-amount';amount.textContent=euro(x.amount);
  const status=document.createElement('span');status.className='status';
- if(tab==='expected'){status.textContent=x.done?'Completed':'Pending';if(x.done)status.classList.add('done')}
- else {const linked=data.expected.find(e=>e.id===x.matchId);status.textContent=linked?'Matched':'Unexpected';if(!linked)status.classList.add('unmatched');else status.title='Matched with: '+linked.description}
+ const linkedReality = tab==='expected' ? data.reality.find(r=>r.matchId===x.id) : null;
+ const linkedExpected = tab==='reality' ? data.expected.find(e=>e.id===x.matchId) : null;
+ const isMatched = tab==='expected' ? Boolean(linkedReality) : Boolean(linkedExpected);
+ if(isMatched) row.classList.add('matched-entry');
+ if(tab==='expected'){
+  status.textContent=isMatched?'Matched':(x.done?'Completed':'Pending');
+  if(isMatched) status.title='Matched with a Reality entry';
+  else if(x.done) status.classList.add('done');
+ } else {
+  status.textContent=linkedExpected?'Matched':'Unexpected';
+  if(!linkedExpected)status.classList.add('unmatched');
+  else status.title='Matched with: '+linkedExpected.description;
+ }
  const actions=document.createElement('div');actions.className='entry-actions';
  if(tab==='expected'){const done=document.createElement('button');done.className='small-btn';done.textContent=x.done?'Undo':'Done';done.onclick=()=>{x.done=!x.done;save();render()};actions.append(done)}
  const edit=document.createElement('button');edit.className='small-btn';edit.textContent='Edit';edit.onclick=()=>openEditor(x.id);actions.append(edit);
